@@ -1,0 +1,16 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if(len == 0 || prices == null) return 0;
+        int[] cool = new int[len];
+        int[] buy = new int[len];
+        int[] sell = new int[len];
+        buy[0] = -prices[0];
+        for(int i = 1;i < len;i++){
+            cool[i] = Math.max(cool[i-1],sell[i-1]);
+            buy[i] = Math.max(buy[i-1],cool[i-1]-prices[i]);
+            sell[i] = buy[i-1]+prices[i];
+        }
+        return Math.max(cool[len-1],sell[len-1]);
+    }
+}
