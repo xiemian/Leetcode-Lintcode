@@ -1,0 +1,17 @@
+class Solution {    
+    public boolean isValidSerialization(String preorder) {
+        if(preorder == null) return false;
+        Stack<String> sta = new Stack();
+        String[] ss = preorder.split(",");
+        
+        for(String s:ss){
+            while(s.equals("#") && !sta.isEmpty() && sta.peek().equals(s)){
+                sta.pop();
+                if(sta.isEmpty()) return false;
+                sta.pop();
+            }
+            sta.push(s);
+        }
+        return sta.size()==1 && sta.peek().equals("#");
+    }
+}
