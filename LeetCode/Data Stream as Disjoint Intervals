@@ -1,0 +1,43 @@
+class SummaryRanges {
+    TreeMap<Integer,Integer> map;
+    
+    /** Initialize your data structure here. */
+    public SummaryRanges() {
+        map = new TreeMap<>();
+    }
+    
+    public void addNum(int val) {
+        if(map.containsKey(val)) return;
+        Integer lk = map.lowerKey(val);
+        Integer hk = map.higherKey(val);
+        if(lk != null && hk != null && map.get(lk)+1==val && val+1==hk){
+            map.put(lk,map.get(hk));
+            map.remove(hk);
+        }else if(lk != null && map.get(lk)+1 >= val){
+            map.put(lk,Math.max(map.get(lk),val));
+        }else if(hk != null && val+1 == hk){
+            map.put(Math.min(val,hk),map.get(hk));
+            map.remove(Math.max(val,hk));
+        }else{
+            map.put(val,val);
+        }
+    }
+    
+    public int[][] getIntervals() {
+        int[][] res = new int[map.size()][2];
+        int i = 0;
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            res[i][0] = entry.getKey();
+            res[i][1] = entry.getValue();
+            i++;
+        }
+        return res;
+    }
+}
+
+/**
+ * Your SummaryRanges object will be instantiated and called as such:
+ * SummaryRanges obj = new SummaryRanges();
+ * obj.addNum(val);
+ * int[][] param_2 = obj.getIntervals();
+ */
