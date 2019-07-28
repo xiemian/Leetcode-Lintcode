@@ -1,0 +1,17 @@
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        List<String> re = new ArrayList<>();
+        String fizz = "Fizz";
+        String buzz = "Buzz";
+        for(int i = 1;i <= n;i++){
+            if(i % 3 == 0 && i % 5 == 0)
+                re.add(fizz+buzz);
+            else if(i % 3 == 0)
+                re.add(fizz);
+            else if(i % 5 == 0)
+                re.add(buzz);
+            else re.add(String.valueOf(i));
+        }
+        return re;
+    }
+}
