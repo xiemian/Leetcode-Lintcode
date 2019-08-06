@@ -1,0 +1,16 @@
+class Solution {
+    public int countSegments(String s) {
+        int re = 0;
+        boolean nonSpace = false;
+        for(char c:s.toCharArray()){
+            if(!nonSpace && c != ' '){
+                nonSpace = true;
+            }else if(nonSpace && c == ' '){
+                nonSpace = false;
+                re++;
+            }
+        }
+        if(nonSpace) re++;
+        return re;
+    }
+}
