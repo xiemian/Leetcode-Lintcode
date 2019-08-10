@@ -1,0 +1,23 @@
+class Solution {
+    public void exchange(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+        return;
+    }
+    public List<Integer> findDuplicates(int[] nums) {
+        Set<Integer> re = new HashSet<>();
+        if(nums == null || nums.length <= 1) return new ArrayList(re);
+        for(int i = 0;i < nums.length;i++){
+            while(true){
+                if(nums[i] != i+1){
+                    if(nums[nums[i]-1] != nums[i]) exchange(nums,i,nums[i]-1);
+                    else {
+                        re.add(nums[i]); break;
+                    }
+                }else break;
+            }
+        }
+        return new ArrayList(re);
+    }
+}
