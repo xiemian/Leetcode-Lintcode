@@ -1,0 +1,29 @@
+class Solution {
+    class Pair{
+        int min,max;
+        public Pair(int min,int max){
+            this.min = min;
+            this.max = max;
+        }
+    }
+    
+    public boolean find132pattern(int[] nums) {
+        if(nums == null || nums.length < 3) return false;
+        Stack<Pair> st = new Stack<>();
+        
+        for(int n : nums){
+            if(st.isEmpty() || n < st.peek().min) st.push(new Pair(n,n));
+            else if(n > st.peek().min){
+                Pair last = st.pop();
+                if(n < last.max) return true;
+                else{
+                    last.max = n;
+                    while(!st.isEmpty() && st.peek().max < n) st.pop();
+                    while(!st.isEmpty() && st.peek().min < n) return true;
+                    st.push(last);
+                }
+            }
+        }
+        return false;
+    }
+}
