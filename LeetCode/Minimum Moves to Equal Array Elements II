@@ -1,0 +1,15 @@
+class Solution {
+    public int getDis(int index, int[] nums){
+        int sum = 0;
+        for(int n : nums){
+            sum += Math.abs(n-nums[index]);
+        }
+        return sum;
+    }
+    
+    public int minMoves2(int[] nums) {
+        int min = 0, max = nums.length-1;
+        Arrays.sort(nums);
+        return getDis(nums.length/2,nums);
+    }
+}
