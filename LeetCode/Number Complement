@@ -1,0 +1,15 @@
+class Solution {
+    public int findComplement(int num) {
+        Stack<Integer> st = new Stack<>();
+        int re = 0;
+        while(num != 0){
+            st.push(num & 1 ^ 1);
+            num = num >> 1;
+        }
+        while(!st.isEmpty()){
+            re = re << 1;
+            re += st.pop();
+        }
+        return re;
+    }
+}
