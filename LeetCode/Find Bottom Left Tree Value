@@ -1,0 +1,32 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        Queue<TreeNode> qe = new LinkedList<>();
+        qe.offer(root);
+        int size = qe.size(), res = root.val;
+        boolean flag = true;
+        while(!qe.isEmpty()){
+            TreeNode node = qe.remove();
+            size--;
+            if(!flag){
+                res = node.val;
+                flag = true;
+            }
+            if(node.left != null) qe.offer(node.left);
+            if(node.right != null) qe.offer(node.right);
+            if(size == 0){
+                size = qe.size();
+                if(flag) flag = false;
+            }        
+        }
+        return res;
+    }
+}
