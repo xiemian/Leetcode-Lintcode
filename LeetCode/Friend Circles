@@ -1,0 +1,23 @@
+class Solution {
+    public void dfs(int a, int b, int[] visited, int[][] matrix){
+        if(matrix[a][b] == 0) return;
+        for(int i = 0;i < matrix.length;i++){
+            if(matrix[a][i] == 1 && visited[i] == 0){
+                visited[i] = 1;
+                dfs(i,i,visited,matrix);
+            }
+        }
+    }
+    
+    public int findCircleNum(int[][] M) {
+        int l = M.length, count = 0;
+        int[] visited = new int[l];
+        for(int i = 0;i < l;i++){
+            if(visited[i] == 0){
+                count++; visited[i] = 1;
+                dfs(i,i,visited,M);
+            } 
+        }
+        return count;
+    }
+}
